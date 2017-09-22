@@ -1,0 +1,40 @@
+<%= nested_form_for @testcategory do |form| %>
+  <% if @testcategory.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@testcategory.errors.count, "error") %> prohibited this testcategory from being saved:</h2>
+
+      <ul>
+      <% @testcategory.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :testname %>
+    <%= form.text_field :testname, id: :testcategory_testname %>
+  </div>
+   
+  <%= form.fields_for :tests do |test_form| %>
+  <%= test_form.text_field :test_name %>
+  <%= test_form.link_to_remove "Remove this test" %>
+
+<% end %>
+   <%# end %>
+    
+   
+   <%= form.fields_for :questions do |test_form| %>
+  <%= test_form.text_field :question_name %>
+  <%= test_form.link_to_remove "Remove this questions" %>
+<p><%#= test_form.link_to_add "Add a question", :questions %></p>
+
+<% end %>
+
+
+<p><%= form.link_to_add "Add a test", :tests %></p>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
